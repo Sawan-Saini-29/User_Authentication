@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import {
   View,
   Text,
@@ -10,13 +10,15 @@ import {
 import CustomButton from "../components/CustomButton"
 import LogoutModal from "../components/LogoutModal"
 import { AuthContext } from "../context/AuthContext"
+import SQLite from 'react-native-sqlite-storage';
+import { User } from '../models/User';
+import { getDBConnection } from '../database/database';
+import { getUsers } from '../services/userService'
 
 const { width } = Dimensions.get("window")
 
-const HomeScreen = () => {
-
+const HomeScreen = ({ navigation }: any) => {
   const { user, logout } = useContext(AuthContext)
-
   const [visible, setVisible] = useState(false)
 
   const confirmLogout = async () => {
@@ -49,6 +51,11 @@ const HomeScreen = () => {
           <Text style={styles.email}>
             {user?.email}
           </Text>
+
+          <CustomButton
+            title="See Users List"
+            onPress={() => navigation.navigate("UserListScreen")}
+          />
 
           <CustomButton
             title="Logout"
@@ -121,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
-    textAlign : "center"
+    textAlign: "center"
   },
 
   name: {

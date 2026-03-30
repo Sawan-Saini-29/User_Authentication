@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Dimensions,
+  Alert,
 } from "react-native";
 
 import CustomInput from "../components/CustomInput";
@@ -15,19 +16,34 @@ import CustomButton from "../components/CustomButton";
 import { AuthContext } from "../context/AuthContext";
 import { validateEmail, validatePassword } from "../utils/validation";
 import ErrorModal from "../components/ErrorModal";
+import SQLite from 'react-native-sqlite-storage';
+import { getDBConnection, createUserTable } from '../database/database';
+import { addUser, checkUserExists } from '../services/userService';
 
 const { width } = Dimensions.get("window");
 
 const SignupScreen = ({ navigation }: any) => {
   const { signup } = useContext(AuthContext);
-
+  const [db, setDb] = useState<SQLite.SQLiteDatabase>();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorVisible, setErrorVisible] = useState(false);
 
+  useEffect(() => {
+    initDB();
+  }, []);
+
+  const initDB = async () => {
+    const database = await getDBConnection();
+    setDb(database);
+    await createUserTable(database);
+  };
+
   const handleSignup = async () => {
+    const userExists = await checkUserExists(db!, email);
+
     if (!name || !email || !password) {
       setErrorMessage("All fields required")
       setErrorVisible(true)
@@ -46,8 +62,21 @@ const SignupScreen = ({ navigation }: any) => {
       return;
     }
 
+    if (userExists) {
+      setErrorMessage("User already exists")
+      setErrorVisible(true)
+      return;
+    }
+
     try {
+
+      await addUser(db!, {
+        name,
+        email
+      });
+
       await signup(name, email, password);
+
     } catch (error: any) {
       setErrorMessage(error.message)
       setErrorVisible(true)

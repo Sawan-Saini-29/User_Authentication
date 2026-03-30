@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,19 +14,32 @@ import CustomButton from "../components/CustomButton";
 
 import { AuthContext } from "../context/AuthContext";
 import { validateEmail } from "../utils/validation";
+import SQLite from 'react-native-sqlite-storage';
+import { getDBConnection } from '../database/database';
+import { checkUserExists } from '../services/userService';
 import ErrorModal from "../components/ErrorModal";
 
 const { width } = Dimensions.get("window");
 
 const LoginScreen = ({ navigation }: any) => {
   const { login } = useContext(AuthContext);
-
+  const [db, setDb] = useState<SQLite.SQLiteDatabase>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorVisible, setErrorVisible] = useState(false);
 
+  useEffect(() => {
+    initDB();
+  }, []);
+
+  const initDB = async () => {
+    const database = await getDBConnection();
+    setDb(database);
+  };
+
   const handleLogin = async () => {
+
     if (!email || !password) {
       setErrorMessage("Please enter email and password")
       setErrorVisible(true)
@@ -41,6 +54,15 @@ const LoginScreen = ({ navigation }: any) => {
     if (!password) {
       setErrorMessage("Password Required")
       setErrorVisible(true)
+    }
+
+    if (db) {
+      const userExists = await checkUserExists(db, email);
+      if (!userExists) {
+        setErrorMessage("User Not Exists")
+        setErrorVisible(true)
+        return;
+      }
     }
 
     try {
