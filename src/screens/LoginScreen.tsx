@@ -18,8 +18,7 @@ import SQLite from 'react-native-sqlite-storage';
 import { getDBConnection } from '../database/database';
 import { checkUserExists } from '../services/userService';
 import ErrorModal from "../components/ErrorModal";
-
-const { width } = Dimensions.get("window");
+import { GlobleStyle } from "../components/GlobleStyle";
 
 const LoginScreen = ({ navigation }: any) => {
   const { login } = useContext(AuthContext);
@@ -74,9 +73,9 @@ const LoginScreen = ({ navigation }: any) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.circleTop} />
-      <View style={styles.circleBottom} />
+    <SafeAreaView style={GlobleStyle.container}>
+      <View style={GlobleStyle.circleTop} />
+      <View style={GlobleStyle.circleBottom} />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -125,11 +124,6 @@ const LoginScreen = ({ navigation }: any) => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F4F6FB",
-  },
-
   container: {
     flex: 1,
     justifyContent: "center",
@@ -172,25 +166,5 @@ const styles = StyleSheet.create({
   signupLink: {
     color: "#4A90E2",
     fontWeight: "600",
-  },
-
-  circleTop: {
-    position: "absolute",
-    width: width * 1.2,
-    height: width * 1.2,
-    backgroundColor: "#4A90E2",
-    borderRadius: width,
-    top: -width * 0.7,
-    left: -width * 0.1,
-  },
-
-  circleBottom: {
-    position: "absolute",
-    width: width * 1.1,
-    height: width * 1.1,
-    backgroundColor: "#6FB1FC",
-    borderRadius: width,
-    bottom: -width * 0.6,
-    right: -width * 0.2,
   },
 });

@@ -12,8 +12,7 @@ import {
 import { getDBConnection } from "../database/database";
 import { getUsers } from "../services/userService";
 import { User } from "../models/User";
-
-const { width } = Dimensions.get("window");
+import { GlobleStyle, width } from "../components/GlobleStyle";
 
 const UserListScreen = ({ navigation }: any) => {
 
@@ -48,18 +47,18 @@ const UserListScreen = ({ navigation }: any) => {
     };
 
     return (
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView style={GlobleStyle.container}>
 
             {/* Background circles */}
-            <View style={styles.circleTop} />
-            <View style={styles.circleBottom} />
+            <View style={GlobleStyle.circleTop} />
+            <View style={GlobleStyle.circleBottom} />
 
             {/* Back button */}
             <TouchableOpacity
-                style={styles.backButton}
+                style={GlobleStyle.backButton}
                 onPress={() => navigation.goBack()}
             >
-                <Text style={styles.backText}>←</Text>
+                <Text style={GlobleStyle.backText}>←</Text>
             </TouchableOpacity>
 
             <View style={styles.container}>
@@ -95,12 +94,6 @@ const UserListScreen = ({ navigation }: any) => {
 export default UserListScreen;
 
 const styles = StyleSheet.create({
-
-    safeArea: {
-        flex: 1,
-        backgroundColor: "#F4F6FB"
-    },
-
     container: {
         flex: 1,
         alignItems: "center",
@@ -153,36 +146,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#777"
     },
-
-    backButton: {
-        marginLeft: 20,
-        marginTop: 10
-    },
-
-    backText: {
-        fontSize: 58,
-        fontWeight: "600",
-        color: "white"
-    },
-
-    circleTop: {
-        position: "absolute",
-        width: width * 1.2,
-        height: width * 1.2,
-        backgroundColor: "#4A90E2",
-        borderRadius: width,
-        top: -width * 0.7,
-        left: -width * 0.1
-    },
-
-    circleBottom: {
-        position: "absolute",
-        width: width * 1.1,
-        height: width * 1.1,
-        backgroundColor: "#6FB1FC",
-        borderRadius: width,
-        bottom: -width * 0.6,
-        right: -width * 0.2
-    }
-
 });

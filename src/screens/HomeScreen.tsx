@@ -10,12 +10,7 @@ import {
 import CustomButton from "../components/CustomButton"
 import LogoutModal from "../components/LogoutModal"
 import { AuthContext } from "../context/AuthContext"
-import SQLite from 'react-native-sqlite-storage';
-import { User } from '../models/User';
-import { getDBConnection } from '../database/database';
-import { getUsers } from '../services/userService'
-
-const { width } = Dimensions.get("window")
+import { GlobleStyle } from "../components/GlobleStyle"
 
 const HomeScreen = ({ navigation }: any) => {
   const { user, logout } = useContext(AuthContext)
@@ -27,9 +22,9 @@ const HomeScreen = ({ navigation }: any) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.circleTop} />
-      <View style={styles.circleBottom} />
+    <SafeAreaView style={GlobleStyle.container}>
+      <View style={GlobleStyle.circleTop} />
+      <View style={GlobleStyle.circleBottom} />
 
       <View style={styles.container}>
 
@@ -58,6 +53,11 @@ const HomeScreen = ({ navigation }: any) => {
           />
 
           <CustomButton
+            title="See App Tree Structure"
+            onPress={() => navigation.navigate("FileTree")}
+          />
+
+          <CustomButton
             title="Logout"
             onPress={() => setVisible(true)}
           />
@@ -80,12 +80,6 @@ export default HomeScreen
 
 
 const styles = StyleSheet.create({
-
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#F4F6FB"
-  },
-
   container: {
     flex: 1,
     justifyContent: "center",
@@ -143,25 +137,5 @@ const styles = StyleSheet.create({
     color: "#777",
     marginBottom: 25
   },
-
-  circleTop: {
-    position: "absolute",
-    width: width * 1.2,
-    height: width * 1.2,
-    backgroundColor: "#4A90E2",
-    borderRadius: width,
-    top: -width * 0.7,
-    left: -width * 0.1
-  },
-
-  circleBottom: {
-    position: "absolute",
-    width: width * 1.1,
-    height: width * 1.1,
-    backgroundColor: "#6FB1FC",
-    borderRadius: width,
-    bottom: -width * 0.6,
-    right: -width * 0.2
-  }
 
 })

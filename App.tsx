@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { NavigationContainer } from "@react-navigation/native"
-
 import { AuthProvider } from "./src/context/AuthContext"
 import AppNavigator from "./src/navigation/AppNavigator"
 import { createUserTable, getDBConnection } from "./src/database/database"

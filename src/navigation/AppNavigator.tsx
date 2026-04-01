@@ -8,6 +8,7 @@ import LoginScreen from "../screens/LoginScreen"
 import SignupScreen from "../screens/SignupScreen"
 import HomeScreen from "../screens/HomeScreen"
 import UserListScreen from "../screens/UserListScreen"
+import FileTree from "../screens/FileTree"
 
 export type RootStackParamList = {
   Splash: undefined
@@ -15,6 +16,7 @@ export type RootStackParamList = {
   Signup: undefined
   Home: undefined
   UserListScreen: undefined
+  FileTree: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -34,6 +36,7 @@ const AppNavigator = () => {
         </>
       ) : (
         <>
+          <Stack.Screen name="FileTree" component={FileTree} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="UserListScreen" component={UserListScreen} />
         </>

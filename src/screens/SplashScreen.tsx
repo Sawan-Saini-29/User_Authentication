@@ -6,8 +6,8 @@ import {
   SafeAreaView,
   Dimensions,
 } from "react-native";
+import { GlobleStyle } from "../components/GlobleStyle";
 
-const { width } = Dimensions.get("window");
 
 const SplashScreen = ({ navigation }: any) => {
   useEffect(() => {
@@ -20,8 +20,8 @@ const SplashScreen = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.circleTop} />
-      <View style={styles.circleBottom} />
+      <View style={GlobleStyle.circleTop} />
+      <View style={GlobleStyle.circleBottom} />
 
       <View style={styles.content}>
         <Text style={styles.logo}>Auth App</Text>
@@ -56,25 +56,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#777",
     marginBottom: 25,
-  },
-
-  circleTop: {
-    position: "absolute",
-    width: width * 1.2,
-    height: width * 1.2,
-    backgroundColor: "#4A90E2",
-    borderRadius: width,
-    top: -width * 0.7,
-    left: -width * 0.1,
-  },
-
-  circleBottom: {
-    position: "absolute",
-    width: width * 1.1,
-    height: width * 1.1,
-    backgroundColor: "#6FB1FC",
-    borderRadius: width,
-    bottom: -width * 0.6,
-    right: -width * 0.2,
   },
 });
