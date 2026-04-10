@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   Dimensions,
@@ -20,6 +19,7 @@ import SQLite from 'react-native-sqlite-storage';
 import { getDBConnection, createUserTable } from '../database/database';
 import { addUser, checkUserExists } from '../services/userService';
 import { GlobleStyle } from "../components/GlobleStyle";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignupScreen = ({ navigation }: any) => {
   const { signup } = useContext(AuthContext);

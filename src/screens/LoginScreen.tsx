@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   Dimensions,
@@ -19,6 +18,7 @@ import { getDBConnection } from '../database/database';
 import { checkUserExists } from '../services/userService';
 import ErrorModal from "../components/ErrorModal";
 import { GlobleStyle } from "../components/GlobleStyle";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = ({ navigation }: any) => {
   const { login } = useContext(AuthContext);

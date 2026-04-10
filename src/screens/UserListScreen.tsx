@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    SafeAreaView,
     FlatList,
     Dimensions,
     TouchableOpacity
@@ -13,6 +12,7 @@ import { getDBConnection } from "../database/database";
 import { getUsers } from "../services/userService";
 import { User } from "../models/User";
 import { GlobleStyle, width } from "../components/GlobleStyle";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const UserListScreen = ({ navigation }: any) => {
 

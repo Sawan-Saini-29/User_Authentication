@@ -3,14 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
-  Dimensions
 } from "react-native"
 
 import CustomButton from "../components/CustomButton"
 import LogoutModal from "../components/LogoutModal"
 import { AuthContext } from "../context/AuthContext"
 import { GlobleStyle } from "../components/GlobleStyle"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const HomeScreen = ({ navigation }: any) => {
   const { user, logout } = useContext(AuthContext)

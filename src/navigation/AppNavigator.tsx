@@ -36,8 +36,8 @@ const AppNavigator = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name="FileTree" component={FileTree} />
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="FileTree" component={FileTree} />
           <Stack.Screen name="UserListScreen" component={UserListScreen} />
         </>
       )}

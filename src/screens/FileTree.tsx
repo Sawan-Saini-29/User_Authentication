@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView, FlatList } from "react-native"
+import { StyleSheet, View, TouchableOpacity, Text, FlatList } from "react-native"
 import { GlobleStyle, width } from "../components/GlobleStyle";
 import { fileTree } from "../components/GlobleData";
 import { FileCodeIcon, FolderOpen, ArrowDownIcon, ArrowRightIcon } from "phosphor-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const FileTree = ({ navigation }: any) => {
     const [tree, setTree] = useState<Array<any>>([]);
